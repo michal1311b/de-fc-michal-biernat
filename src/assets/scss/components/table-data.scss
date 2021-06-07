@@ -1,0 +1,90 @@
+$background: #efefef;
+$lfs-blue: #006ac6;
+$lfs-yellow: #fab700;
+$lfs-grey: #75787b;
+
+.table {
+  width: 100%;
+  &__head {
+    background-color: $table-head-bg;
+  }
+  &__label {
+    font-family: $project-font;
+    font-weight: 500;
+    font-size: 16px;
+    color: $table-label;
+    text-align: left;
+    height: 54px;
+  }
+  &__row {
+    border-top: 1px solid $table-border;
+    border-bottom: 1px solid $table-border;
+    height: 80px;
+  }
+  &__cell {
+    align-items: center;
+    height: 80px;
+    font-size: 16px;
+    font-family: $project-font;
+    font-weight: 400;
+    text-align: left;
+    color: $table-cell;
+    &--gender {
+      display: flex;
+      align-items: center;
+    }
+  }
+  &__avatar {
+    max-width: 43px;
+    max-height: 68px;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.favorite-btn {
+  &__container {
+    width: 43px;
+    height: 43px;
+    border: 1px solid $favorite;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &--isFavorite {
+      background-color: $favorite;
+    }
+  }
+  &__star {
+    svg {
+      fill: $favorite;
+    }
+
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.tabs {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  padding-bottom: 20px;
+}
+
+.tab {
+  &__container {
+    width: 160px;
+    cursor: pointer;
+  }
+
+  font-family: $project-font;
+  font-size: 16px;
+  font-weight: 500;
+  color: $table-label;
+  &--active {
+    border-bottom: 2px solid $favorite;
+    color: $favorite;
+  }
+}
