@@ -39,6 +39,7 @@
       height: inherit;
       border: none;
       cursor: pointer !important;
+      background-color: $light;
     }
     > .active {
       background-color: $favorite;
