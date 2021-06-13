@@ -1,10 +1,10 @@
 <template>
   <div class="searchbar">
     <div class="searchbar__contanier">
-      <div class="searchbar__btn">Search by</div>
+      <div class="searchbar__btn" @click="findCharacter">Search by</div>
       <select class="searchbar__select" v-model="searchType">
         <option value="name">Name</option>
-        <option value="identifier">Identifier</option>
+        <option value="id">Indetifier</option>
         <option value="episode">Episode</option>
       </select>
       <div class="searchbar__text__container">

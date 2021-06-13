@@ -171,10 +171,10 @@ export default {
   },
   computed: {
     records() {
-      return this.itemsNumber;
+      return this.$store.state.characterRecords;
     },
     favoriteRecords() {
-      return this.favoritesNumber;
+      return this.$store.state.favorites.length;
     },
     listOfCharacters() {
       return this.$store.state.characters;

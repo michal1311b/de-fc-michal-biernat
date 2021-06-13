@@ -1,0 +1,20 @@
+query filterCharacterByID($page: Int!, $filter: FilterEpisode!) {
+  episode(page: $page, filter: $filter) {
+    characters {
+      info {
+        count
+        pages
+      }
+      results {
+        image
+        id
+        name
+        gender
+        species
+        episode {
+          episode
+        }
+      }
+    }
+  }
+}

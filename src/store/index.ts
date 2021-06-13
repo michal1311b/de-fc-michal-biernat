@@ -3,7 +3,9 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     characters: null,
-    favorites: []
+    favorites: [],
+    characterRecords: 0,
+    favoriteRecords: 0,
   },
   mutations: {
     setCharacters(state, payload) {
@@ -16,7 +18,10 @@ export default createStore({
     removeFavoriteCharacter(state, payload) {
       const result : string[] = state.favorites;
       result.splice(payload, 1);
-    }
+    },
+    setCharacterRecords(state, payload) {
+      state.characterRecords = payload;
+    },
   },
   actions: {},
   modules: {},
@@ -26,7 +31,9 @@ export default createStore({
     },
     getFavoritesCharacters(state) {
       return state.favorites;
+    },
+    getFavoritesRecords(state) {
+      return state.favorites.length;
     }
-    
   },
 });

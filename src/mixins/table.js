@@ -1,7 +1,7 @@
 import { useQuery, useResult } from "@vue/apollo-composable";
 import { allCharacters } from "@/graphql/allCharacters.query.gql";
 import { filterCharacters } from "@/graphql/filterCharacters.query.gql";
-
+import { filterCharacterByID } from "@/graphql/filterCharacterByID.query.gql";
 export const tableMixin = {
   data() {
     return {
@@ -13,17 +13,18 @@ export const tableMixin = {
     };
   },
   methods: {
-    changePage(number, filter = "") {
+    changePage(number, filter = "", searchType = "") {
       this.submitting = true;
       let page = (this.page = number);
       let data, query;
 
       if (filter) {
+        console.log(searchType)
         data = {
           page,
           filter,
         };
-        query = filterCharacters;
+        query = this.chooseFilterQuery(searchType);
       } else {
         data = {
           page,
@@ -32,14 +33,15 @@ export const tableMixin = {
       }
 
       let { result } = useQuery(query, data);
-      let characters = useResult(result, null, (data) => {
+      const characters = useResult(result, null, (data) => {
         return data.characters.results;
       });
-      this.itemsNumber = useResult(result, null, (data) => {
+      const itemsNumber = useResult(result, null, (data) => {
         return data.characters.info.count;
       });
 
       this.$store.commit("setCharacters", characters);
+      this.$store.commit("setCharacterRecords", itemsNumber);
 
       this.submitting = false;
     },
@@ -89,10 +91,21 @@ export const tableMixin = {
       }
     },
     findCharacter() {
+      if(!this.searchText) {
+        return;
+      }
+
       const entries = new Map([[this.searchType, this.searchText]]);
       const filter = Object.fromEntries(entries);
 
-      this.changePage(1, filter);
+      this.changePage(1, filter, this.searchType);
     },
+    chooseFilterQuery(searchType) {
+      if(searchType === 'name') {
+        return filterCharacters;
+      } else if(searchType === 'id') {
+        return filterCharacterByID;
+      }
+    }
   },
 };
