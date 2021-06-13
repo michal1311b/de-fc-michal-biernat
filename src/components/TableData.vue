@@ -83,7 +83,7 @@
         <div v-else>There are no chatacters.</div>
       </div>
       <div v-else>
-        <div v-if="favorites.length">
+        <div v-if="listOfFavorites && listOfFavorites.length">
           <table class="table">
             <thead class="table__head">
               <th class="table__label">Photo</th>
@@ -97,7 +97,7 @@
             <tbody>
               <tr
                 class="table__row"
-                v-for="(item, index) in favorites"
+                v-for="(item, index) in listOfFavorites"
                 :key="index"
               >
                 <th>
@@ -178,6 +178,9 @@ export default {
     },
     listOfCharacters() {
       return this.$store.state.characters;
+    },
+    listOfFavorites() {
+      return this.$store.state.favorites;
     },
   },
   methods: {

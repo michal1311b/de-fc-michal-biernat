@@ -6,10 +6,8 @@ export const tableMixin = {
   data() {
     return {
       page: 1,
-      characters: null,
       itemsNumber: 0,
       favoritesNumber: 0,
-      favorites: [],
       searchText: "",
       searchType: "name",
     };
@@ -60,18 +58,18 @@ export const tableMixin = {
       return episodes[episodes.length - 1].episode;
     },
     addToFavorite(item) {
-      const index = this.favorites.findIndex(
+      const index = this.listOfFavorites.findIndex(
         (favorite) => favorite.id === item.id
       );
       if (index === -1) {
-        this.favorites.push(item);
+        this.$store.commit("setFavoriteCharacter", item);
       } else {
-        this.favorites.splice(index, 1);
+        this.$store.commit("removeFavoriteCharacter", index);
       }
-      this.favoritesNumber = this.favorites.length;
+      this.favoritesNumber = this.listOfFavorites.length;
     },
     isFavorite(item) {
-      const index = this.favorites.findIndex(
+      const index = this.listOfFavorites.findIndex(
         (favorite) => favorite.id === item.id
       );
       if (index === -1) {
@@ -81,7 +79,7 @@ export const tableMixin = {
       }
     },
     chooseFavoriteStar(item) {
-      const index = this.favorites.findIndex(
+      const index = this.listOfFavorites.findIndex(
         (favorite) => favorite.id === item.id
       );
       if (index === -1) {
